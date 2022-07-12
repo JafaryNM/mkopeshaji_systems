@@ -18,6 +18,10 @@ class Client(models.Model):
     location = models.CharField(max_length = 150)
     gender = models.CharField(max_length = 40, choices=GENDER_CHOICES, default='Male')
     
+    def __str__(self):
+        
+        return self.first_name
+    
 
 ################### LOAN MODEL #####################
     
@@ -28,6 +32,10 @@ class Loan(models.Model):
     repayment_date = models.DateField(auto_now=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     fieldName = models.DateField(auto_now=False, auto_now_add=False)
+    
+    def __str__(self):
+        
+        return self.amount
     
     
 
@@ -51,6 +59,10 @@ class Repayment(models.Model):
   interest_paid = models.FloatField(null=True)
   loan = models.ForeignKey(Loan, on_delete=models.CASCADE)
   loan_schedule = models.ForeignKey(LoanSchedule, on_delete=models.CASCADE)
+  
+  def __str__(self):
+      
+      return self.payment_date
   
   
   
