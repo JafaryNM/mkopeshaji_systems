@@ -1,7 +1,6 @@
 
 from django.db import models
 
-
 # Create your models here.
 GENDER_CHOICES = (
     
@@ -14,7 +13,7 @@ GENDER_CHOICES = (
 class Client(models.Model):
     
     first_name = models.CharField(max_length = 150, null=True)
-    address = models.CharField(max_length = 150, null=True)
+    phone= models.IntegerField(max_length=20, null=True)
     location = models.CharField(max_length = 150)
     gender = models.CharField(max_length = 40, choices=GENDER_CHOICES, default='Male')
     
