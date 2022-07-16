@@ -1,0 +1,75 @@
+
+
+
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block contents %}
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">All Clients</h4>
+            
+        </div>
+        <div class="card-body">
+            
+            <div class="table-rep-plugin">
+                <div class="table-responsive mb-0" data-pattern="priority-columns">
+                    <table id="tech-companies-1" class="table">
+
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Client</th>
+                                <th>Amount</th>
+                                <th>Interest</th>
+                                <th>Loan Date</th>
+                                <th >Repayment Date</th>
+                                <th>Payement Installment</th>
+                                <th>Action <th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for loan in loans %}
+                            <tr>
+                                
+
+                                <td> {{forloop.counter}} </td>
+                                <td> {{loan.client}}</td>
+                                <td> {{loan.amount}}</td>
+                                <td>{{loan.interest_amount}} </td>
+                                <td> {{loan.loan_date}}</td>
+                                <td> {{loan.repayment_date}}</td>
+                                <td>{{loan.installment}} </td>
+
+                                
+                                <td>
+                                
+                                    <a href="" class="btn btn-primary p-1"> Loan Schedule </a>
+                                    <a href="{% url 'update_loan' loan.id %}" class="btn btn-success p-1"> Update </a>
+                                    <a href="{% url 'delete_loan' loan.id %}" class="btn btn-danger p-1"> Delete </a>
+                                
+                                </td>
+                            
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- end card -->
+</div>
+    
+
+
+{% endblock contents %}

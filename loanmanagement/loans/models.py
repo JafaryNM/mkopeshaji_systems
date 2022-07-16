@@ -1,5 +1,6 @@
 
 from django.db import models
+from datetime import datetime , date
 
 # Create your models here.
 GENDER_CHOICES = (
@@ -25,12 +26,13 @@ class Client(models.Model):
 ################### LOAN MODEL #####################
     
 class Loan(models.Model):
-    amount=models.FloatField(max_length=50, null=True)
+    amount=models.FloatField(max_length=300, null=True)
     installment = models.IntegerField(null=True)
-    loan_date = models.DateField(auto_now=True)
-    repayment_date = models.DateField(auto_now=True)
+    interest_amount=models.FloatField(max_length=300 ,null=True)
+    loan_date = models.DateField(auto_now=False , null=True , blank=True )
+    repayment_date = models.DateField(auto_now=False , null=True , blank=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    fieldName = models.DateField(auto_now=False, auto_now_add=False)
+   
     
     def __str__(self):
         
@@ -40,11 +42,9 @@ class Loan(models.Model):
 
 ############### LOAN SCHEDULE ######################
 class  LoanSchedule(models.Model):
-    date_schedule = models.DateField(auto_now=False, auto_now_add=False)
-    amount = models.FloatField()
-    interest = models.FloatField()
-    principle= models.FloatField()
-    status = models.CharField(max_length=20)
+    date_schedule = models.DateField(auto_now=False, auto_now_add=False ,null= True, blank=True)
+    pamount = models.FloatField()
+    pinterest = models.FloatField()
     loan = models.ForeignKey(Loan, on_delete=models.CASCADE)
     
 
