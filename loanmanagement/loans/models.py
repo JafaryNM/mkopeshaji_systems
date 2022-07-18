@@ -46,6 +46,9 @@ class  LoanSchedule(models.Model):
     pamount = models.FloatField()
     pinterest = models.FloatField()
     loan = models.ForeignKey(Loan, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.pamount
     
 
 ###################### REPAYMENT MODEL #################

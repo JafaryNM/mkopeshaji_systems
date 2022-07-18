@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
+
+
 {% block contents %}
 
 <div class="col-12">
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">All Clients</h4>
-            
+
         </div>
         <div class="card-body">
             <div class="table-rep-plugin">
@@ -19,14 +21,16 @@
                                 <th>Phone</th>
                                 <th >Gender</th>
                                 <th>Location</th>
+
                                 <th>Action <th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
+                          
                             {% for client in clients %}
                             <tr>
-                                
+
 
                                 <td> {{forloop.counter}} </td>
                                 <td> {{client.first_name}}</td>
@@ -34,12 +38,12 @@
                                 <td>{{client.gender}}</td>
                                 <td>{{client.location}}</td>
                                 <td>
-                                    
+
                                     <a href=" {% url 'update_clients' client.id %}" class="btn btn-success p-2"> Update </a>
                                     <a href="{% url 'delete_client' client.id %}" class="btn btn-danger p-2"> Delete </a>
-                                
+
                                 </td>
-                            
+
                             </tr>
 
                             {% endfor %}
@@ -53,5 +57,5 @@
     </div>
     <!-- end card -->
 </div>
-    
+
 {% endblock contents %}

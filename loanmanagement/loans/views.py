@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from .models import Client, Loan,LoanSchedule
 from django.views.generic import View, TemplateView, CreateView,ListView, UpdateView,DeleteView
 from .forms import LoanForm
+from itertools import repeat
 # Create your views here.
 
 
@@ -48,44 +49,60 @@ class DeleteClient(DeleteView):
     model=Client
     template_name='clients/delete.html'
     success_url=reverse_lazy('indexpage')
-    
-    
-# Add Schedule 
+
+
+
+# Add loan
+
 
 class CreateLoan(CreateView):
   
     template_name='loan/loan_form.html'
-    template_list='loan/schedule.html'
+    template_list='loan/loans.html'
     form_class=LoanForm
     success_url=reverse_lazy('indexpage')
-    
-    def  post(self, request, *args, **kwargs):
-     
-        if request.method == 'POST':
-               form=LoanForm
-               if form.is_valid:
-                 amount=request.POST.get('amount')
-                 repayement_date=request.POST.get('repayement_date')
-                 interest_amount=request.POST.get('interest_amount')
-                 installment=request.POST.get('installment')
-                 repayment_date=request.POST.get('repayment_date')
-                
-                 
-                 #Create New Object In Schedule
-                 
-                 pschedule_amount=float(amount)/float(installment)
-                 pinterest_amount=float(interest_amount)/float(installment)
-                 srepayment_date=repayment_date
-              
-                 
-                 loan_schedule=LoanSchedule.objects.create(date_schedule=srepayment_date,pamount=pschedule_amount,pinterest=pinterest_amount)
-                 loan_schedule.save()
-                 return render(self.request, self.template_list,{'amount':amount,'repayment_date':repayement_date,'interest_amount':interest_amount,'installment':installment ,'repayment_date':repayement_date})
-             
-             
-        
 
-# Add Schedule
+
+    # Add Loan
+    def  post(self, request, *args, **kwargs):
+        form=LoanForm(request.POST)
+        if form.is_valid:
+            form=form.save(commit=False)
+            form.created_by=request.user
+            form.save()
+            # Get Value  From form
+            amount=form.amount
+            repayement_date = form.repayment_date
+            interest_amount = form.interest_amount
+            interest_amount = form.interest_amount
+            installment = form.installment
+            repayment_date= form.repayment_date
+
+            # Add Schedule Data
+            pschedule_amount=float(amount)/float(installment)
+            pinterest_amount=float(interest_amount)/float(installment)
+            srepayment_date=repayment_date
+            # Insert Data to
+            loan_schedule = LoanSchedule.objects.create(date_schedule=srepayment_date,pamount=pschedule_amount,pinterest=pinterest_amount,loan_id=form.id)
+
+            # Take data to database
+
+            pschedule_values=[]
+
+            pschedule_values.extend(repeat(pschedule_amount,installment))
+            for pschedule_value in pschedule_values:
+
+                return HttpResponse(pschedule_value)
+
+
+
+
+
+
+
+
+
+
 
 class AddSchedule(View):
     
@@ -95,7 +112,7 @@ class AddSchedule(View):
     def get(request,*args,**kwargs):
         return render(self.template_name)
         
-        
+    
 # Display  Loan
 
 class DisplayLoan(ListView):

@@ -4,6 +4,8 @@
 
 {% extends 'base.html' %}
 
+{% load loans_tags %}
+
 {% load static %}
 
 {% block contents %}
@@ -30,11 +32,13 @@
                                 <th >Repayment Date</th>
                                 <th>Payement Installment</th>
                                 <th>Action <th>
+
                                 
                                 
                             </tr>
                         </thead>
                         <tbody>
+                        <li> Return all schedule: {% loan_schedule %} </li>
                             {% for loan in loans %}
                             <tr>
                                 
