@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-
+{% load crispy_forms_tags %}
 
 {% block contents %}
 
@@ -21,7 +21,6 @@
                                 <th>Phone</th>
                                 <th >Gender</th>
                                 <th>Location</th>
-
                                 <th>Action <th>
 
                             </tr>
@@ -32,8 +31,8 @@
                             <tr>
 
 
-                                <td> {{forloop.counter}} </td>
-                                <td> {{client.first_name}}</td>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{client.name}}</td>
                                 <td>{{client.phone}}</td>
                                 <td>{{client.gender}}</td>
                                 <td>{{client.location}}</td>

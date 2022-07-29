@@ -1,9 +1,6 @@
 
 from django.urls import path
-from .views import BasePage,ClientCreate,DisplayClient,UpdateClient,DeleteClient,CreateLoan,DisplayLoan,UpdateLoan,DeleteLoan
-
-
-
+from .views import *
 urlpatterns = [
     
     
@@ -24,6 +21,11 @@ urlpatterns = [
    
    
    ################## SCHEDULE URL ###########################
-   #path('LoanSchedule/',DisplaySchedule.as_view(), name='display_schedule')
+   path('loans/<int:pk>',SingleSchedule.as_view(), name='display_schedule'),
+
+   
+   ################### REPAYMENTS URL #########################
+
+   
     
 ]

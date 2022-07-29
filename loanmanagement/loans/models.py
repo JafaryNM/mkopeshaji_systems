@@ -1,4 +1,5 @@
 
+
 from django.db import models
 from datetime import datetime , date
 
@@ -13,14 +14,14 @@ GENDER_CHOICES = (
 ################### CLIENT MODEL ###################
 class Client(models.Model):
     
-    first_name = models.CharField(max_length = 150, null=True)
-    phone= models.IntegerField(max_length=20, null=True)
+    name = models.CharField(max_length = 150, null=True,)
+    mobile= models.IntegerField(max_length=20, null=True)
     location = models.CharField(max_length = 150)
     gender = models.CharField(max_length = 40, choices=GENDER_CHOICES, default='Male')
     
     def __str__(self):
         
-        return self.first_name
+        return self.name
     
 
 ################### LOAN MODEL #####################

@@ -1,0 +1,68 @@
+
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+{% block contents %}
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">All Clients</h4>
+
+           
+            
+        </div>
+        <div class="card-body">
+            
+            <div class="table-rep-plugin">
+                <div class="table-responsive mb-0" data-pattern="priority-columns">
+                    <table id="tech-companies-1" class="table">
+
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Loan Principle Schedule</th>
+                                <th>Loan Interest Schedule</th>
+                                <th>Date Schedule Loan Received</th>
+                            
+                                
+
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                            {% for schedule in schedules %}
+                            <tr>
+                                
+
+                                <td> {{forloop.counter}} </td>
+                                
+                                 <td> {{schedule.date_schedule}}</td>
+                                 <td> {{schedule.pamount }}</td>
+                                 <td> {{schedule.pinterest}}</td>
+                               
+
+                                
+                                
+                            
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- end card -->
+</div>
+    
+
+
+{% endblock contents %}

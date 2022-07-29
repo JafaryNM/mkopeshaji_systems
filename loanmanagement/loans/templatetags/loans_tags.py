@@ -11,12 +11,6 @@ def loan_schedule():
     all_loan_schedules=LoanSchedule.objects.count()
     return all_loan_schedules
 
-@register.inclusion_tag('schedule.html')
-def show_latest_name():
-    last=Client.objects.all()
-    return {'last':last}
-
-
 
 
 
